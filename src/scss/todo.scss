@@ -1,0 +1,74 @@
+.todo {
+  padding: 10px;
+
+  h3 {
+    text-align: center;
+    padding: 10px;
+    color: #8d8d8d;
+  }
+
+  .btn-place {
+    display: flex;
+    justify-content: center;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 0px;
+    margin-right: 3px;
+    border: none;
+    font-weight: bold;
+    color: #ffffff;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  .primary {
+    background: #1f6cff;
+  }
+
+  .danger {
+    background-color: #ff1f1f;
+  }
+
+  .block {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #dedede;
+
+    .title {
+      flex: 3;
+      font-size: 14px;
+    }
+
+    .status {
+      flex: 1;
+    }
+
+    .btn-place {
+      flex: 2;
+    }
+  }
+
+  .paginate {
+    margin: 5px;
+    margin-top: 10px;
+
+    button {
+      background-color: #008cff;
+    }
+
+    .active {
+      background-color: #ff0000;
+    }
+  }
+}

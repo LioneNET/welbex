@@ -1,0 +1,46 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.main {
+  background-color: #faf9f9;
+  margin: 0 auto;
+  max-width: 1040px;
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #dcdcdc;
+
+  a {
+    padding: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #828282;
+    margin-right: 1px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.7;
+      color: #222222;
+    }
+  }
+}
+
+@import "./todo.scss";
