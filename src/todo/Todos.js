@@ -1,19 +1,28 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from 'react';
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+
+import ItemEditModal from "./ItemEditModal";
+import ItemDeleteModal from "./ItemdDeleteModal";
+import Paginator from "./Paginator";
 import { getTodos } from "../store/actions/todoActions";
 
 const Todos = () => {
-  const limit = 10
+  const { items: todoItems, isLoading } = useSelector(state => state.todo)
+  const [showItems, setShowItems] = useState([])
+  const [modalContent, setModalContent] = useState(false)
   const dispatch = useDispatch()
-  const { items: todoItems, isLoading, totalPages } = useSelector(state => state.todo)
-  const params = useParams()
 
-  useEffect(() => {
-    const { page } = params
-    const start = page * limit
-    dispatch(getTodos(start, limit))
-  }, [params])
+  const handleEdit = (id) => {
+    setModalContent(<ItemEditModal item={todoItems.find(i => i.id === id)} setModalContent={setModalContent} />)
+  }
+
+  const handleDelete = (id) => {
+    setModalContent(<ItemDeleteModal item={todoItems.find(i => i.id === id)} setModalContent={setModalContent} />)
+  }
+
+  const handleAdd = () => {
+    setModalContent(<ItemEditModal setModalContent={setModalContent} />)
+  }
 
   const Item = ({ title, completed, id }) => {
     return (
@@ -21,22 +30,26 @@ const Todos = () => {
         <div className="title">{title}</div>
         <div className="status">Статус: <span>{completed ? 'готово' : 'не готово'}</span></div>
         <div className="btn-place">
-          <button className="primary">Изменить</button>
-          <button className="danger">Удалить</button>
+          <button className="primary" onClick={() => handleEdit(id)}>Изменить</button>
+          <button className="danger" onClick={() => handleDelete(id)}>Удалить</button>
         </div>
       </div>
     )
   }
 
+  if(isLoading) {
+    return (
+      <h1>Загрузка</h1>
+    )
+  }
+
   return (
     <div className="todo">
+      {modalContent}
       <h3>Список задач</h3>
-      {todoItems.map(item => <Item key={item.id} {...item} />)}
-      <div className="paginate">
-        <button className="active">1</button>
-        <button>2</button>
-        <button>3</button>
-      </div>
+      <button className="primary" onClick={handleAdd}>Добавить</button>
+      {showItems.map(item => <Item key={item.id} {...item} />)}
+      <Paginator setShowItems={setShowItems} />
     </div>
   )
 }
