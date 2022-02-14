@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 
-const Paginator = ({setShowItems}) => {
+const Paginator = ({ setShowItems }) => {
 
   const limit = 15
   const items = useSelector(state => state.todo.items)
-  const [activePage, setActivePage] = useState(1)
   const [pages, setPages] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -18,12 +17,18 @@ const Paginator = ({setShowItems}) => {
       arr.push(i + 1)
     }
     setPages(arr)
-  }, [items])
+  }, [items, currentPage])
+
+  const changePage = page => {
+    setCurrentPage(page)
+  }
 
   return (
     <div className="paginate">
       {pages.map(page => (
-        <button className={activePage === page ? 'active' : ''} key={`page_${page}`}>{page}</button>
+        <button onClick={() => changePage(page)}
+          className={currentPage === page ? 'active' : ''}
+          key={`page_${page}`}>{page}</button>
       ))}
     </div>
   )

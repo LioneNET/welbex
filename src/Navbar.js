@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, Outlet } from "react-router-dom"
+import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom"
 import { getTodos } from "./store/actions/todoActions"
 
 
@@ -8,19 +8,21 @@ const Navbar = () => {
 
   const dispatch = useDispatch()
   const items = useSelector(state => state.todo.items)
-
+  const nav = useNavigate()
+  const params = useParams()
+  console.log(params)
   useEffect(() => {
     if (!items.length) {
       dispatch(getTodos())
     }
-
+    nav('/main')
   }, [])
 
   return (
     <div className="main">
       <div className="navbar">
-        <Link to='/main' >Главная</Link>
-        <Link to='/todos' >Сисок задач</Link>
+        <NavLink to='/main' >Главная</NavLink>
+        <NavLink to='/todos' >Сисок задач</NavLink>
       </div>
       <Outlet />
     </div>
