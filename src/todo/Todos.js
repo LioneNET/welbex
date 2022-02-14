@@ -1,16 +1,14 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useState } from 'react';
+import { useSelector } from "react-redux"
+import { useState } from 'react';
 
 import ItemEditModal from "./ItemEditModal";
 import ItemDeleteModal from "./ItemdDeleteModal";
 import Paginator from "./Paginator";
-import { getTodos } from "../store/actions/todoActions";
 
 const Todos = () => {
   const { items: todoItems, isLoading } = useSelector(state => state.todo)
   const [showItems, setShowItems] = useState([])
   const [modalContent, setModalContent] = useState(false)
-  const dispatch = useDispatch()
 
   const handleEdit = (id) => {
     setModalContent(<ItemEditModal item={todoItems.find(i => i.id === id)} setModalContent={setModalContent} />)

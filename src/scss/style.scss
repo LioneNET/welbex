@@ -101,6 +101,11 @@ input[type="text"] {
       color: #222222;
     }
   }
+
+  .active {
+    color: #1f6cff;
+  }
 }
 
 @import "./todo.scss";
+@import './main.scss';

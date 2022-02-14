@@ -7,7 +7,7 @@ const setTodoItems = items => ({ type: 'todo/set.items', data: items })
 const getTodos = () => dispatch => {
   const $api = useApi()
   dispatch(loadingIsStart())
-  $api.get(`todos`)
+  $api.get('todos')
     .then(res => {
       dispatch(setTodoItems(res.data))
     })
